@@ -3,23 +3,24 @@ import pprint
 
 USER_DATA_PATH = "/home/paolot/.local/share/FoundryVTT/Data/"
 
-
+# Use "JSON.stringify(Scenes.instance)" on Console for the json and copy string contents
 f = open("a.json", "r")
 data = json.load(f)
-for z in data:
-    if z["background"]["src"] is None:
+
+for x in data:
+    if x["background"]["src"] is None:
         continue
 
-    name = z["name"]
-    grid_size = z["grid"]["size"]
-    offset_x = z["padding"] * z["width"]
-    offset_y = z["padding"] * z["height"]
-    background_path = USER_DATA_PATH + z["background"]["src"]
-    walls = z["walls"]
+    name = x["name"]
+    grid_size = x["grid"]["size"]
+    offset_x = x["padding"] * x["width"]
+    offset_y = x["padding"] * x["height"]
+    background_path = USER_DATA_PATH + x["background"]["src"]
+    walls = x["walls"]
 
     data = {name, grid_size, offset_x, offset_y, background_path}
 
     try:
-        pprint.pprint(z["walls"][0]["c"])
+        pprint.pprint(x["walls"])
     except IndexError:
-        pass
+        print("this can't happen")
